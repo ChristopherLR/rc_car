@@ -13,9 +13,12 @@ fastapi = "^0.68.1"
 uvicorn = "^0.15.0"
 opencv-python = "^4.5.3"
 Jinja2 = "^3.0.1"
+websockets = "^10.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+autopep8 = "^1.5.7"
+black = {version = "^21.9b0", allow-prereleases = true}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
