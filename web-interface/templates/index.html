@@ -1,16 +1,105 @@
 <html>
   <head>
     <title>Stream</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <style>
-      img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+      #feed {
+        overflow: scroll;
+        height: 300px;
+      }
+      #container {
+        display: flex;
+        flex-direction: row;
+      }
+      #video-container {
+        flex: 1;
+      }
+      #feed-container {
+        flex: 1;
+      }
+      #controller {
+        display: flex;
+        margin: 10px 10px 10px 10px;
+        padding: 10px;
       }
     </style>
   </head>
+
   <body>
-    <img src="http://localhost:8080/video"/>
-    <p>{{ test }}</p>
+    <div>
+      <div class="px-4 py-5 sm:px-6">
+        <h2 class="text-lg leading-6 font-medium text-gray-900">
+          Stream
+        </h2>
+      </div>
+
+      <div id="container" class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div id="video-container">
+          <img id="video" src='/video'/>
+        </div>
+        <div id="feed-container">
+          <div id="feed"></div>
+        </div>
+      </div>
+
+      <div id="controller" class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <button onClick="press_button('forward')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="forward">Forward</button>
+        <button onClick="press_button('back')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="back">Back</button>
+        <button onClick="press_button('left')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="left">Left</button>
+        <button onClick="press_button('right')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="right">Right</button>
+      </div>
+    </div>
+
+    <script>
+      let socket = new WebSocket("ws://192.168.1.101:8080/ws");
+      let buttons_socket = new WebSocket("ws://192.168.1.101:8080/buttons");
+      let feed = document.getElementById("feed")
+      let feed_container = document.getElementById("feed-container")
+      let hovering = false;
+
+      function press_button(type){
+        buttons_socket.send(type)
+        console.log(type)
+      }
+
+      feed_container.onmouseenter = function(){
+        hovering = true
+      }
+
+      feed_container.onmouseleave = function(){
+        hovering = false
+      }
+
+
+      let video = document.getElementById("video")
+      let message_buffer = []
+
+
+      socket.onconnect = () => {
+        socket.send('connected')
+      }
+      socket.onerror = error => {
+        console.error(error)
+      }
+      socket.onmessage = msg => {
+        message_buffer.push(msg['data'])
+        if (message_buffer.length > 20) message_buffer.shift()
+
+        feed.innerHTML = '';
+
+        message_buffer.forEach(message => {
+          let li = document.createElement('li')
+          li.appendChild(document.createTextNode(message))
+          feed.appendChild(li)
+        })
+        
+        if (!hovering){
+          feed.style.height = video.height;
+          feed.scrollTop = feed.scrollHeight - feed.clientHeight;
+        }
+      }
+    </script>
   </body>
+
 </html>

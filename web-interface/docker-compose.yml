@@ -1,0 +1,15 @@
+version: '3'
+
+volumes:
+  redis-vol:
+
+services:
+  redis:
+    hostname: redis
+    image: 'redis'
+    command: 'redis-server'
+    volumes:
+      - 'redis-vol:/data/redis'
+    ports:
+      - "6379:6379"
+
