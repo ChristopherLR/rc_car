@@ -52,7 +52,7 @@
     </div>
 
     <script>
-      let server_url = {{ server_url }};
+      let server_url = '{{ server_url }}';
       let socket = new WebSocket(`ws://${server_url}/ws`);
       let buttons_socket = new WebSocket(`ws://${server_url}/buttons`);
       let feed = document.getElementById("feed")
