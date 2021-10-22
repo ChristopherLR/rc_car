@@ -52,8 +52,9 @@
     </div>
 
     <script>
-      let socket = new WebSocket("ws://192.168.1.101:8080/ws");
-      let buttons_socket = new WebSocket("ws://192.168.1.101:8080/buttons");
+      let server_url = {{ server_url }};
+      let socket = new WebSocket(`ws://${server_url}/ws`);
+      let buttons_socket = new WebSocket(`ws://${server_url}/buttons`);
       let feed = document.getElementById("feed")
       let feed_container = document.getElementById("feed-container")
       let hovering = false;

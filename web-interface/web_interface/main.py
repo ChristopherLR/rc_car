@@ -15,7 +15,11 @@ pubsub = redis.pubsub()
 
 @app.get('/')
 async def root(request: Request):
-    return templates.TemplateResponse("index.html", context={"request": request, "feed": f'video' })
+    return templates.TemplateResponse("index.html", context={
+        "request": request,
+        "feed": f'video',
+        "server_url": "192.168.1.138:8080"
+    })
 
 async def gen():
     while True:
