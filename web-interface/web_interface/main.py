@@ -6,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 import aioredis
 import asyncio
 import async_timeout
+import pika
 
 
 app = FastAPI()
@@ -33,8 +34,11 @@ def video_feed():
 @app.websocket("/buttons")
 async def button_endpoint(websocket: WebSocket):
     await websocket.accept()
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
+    channel = connection.channel()
     while True:
         data = await websocket.receive_text()
+        channel.basic_publish(exchange='', routing_key='ui_commands', body=data)
         print(data)
 
 @app.websocket("/ws")
