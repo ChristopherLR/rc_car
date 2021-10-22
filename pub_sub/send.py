@@ -8,6 +8,6 @@ channel.queue_declare(queue='hello')
 
 while True:
     x = str(input("type something: "))
-    print(f" [x] Sent '{x}'")
+    print(f"Daniel likes to send '{x}'")
     channel.basic_publish(exchange='', routing_key='hello', body=x)
 connection.close()
