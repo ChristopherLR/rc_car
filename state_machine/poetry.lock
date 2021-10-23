@@ -1,4 +1,26 @@
 [[package]]
+name = "aioamqp"
+version = "0.14.0"
+description = "AMQP implementation using asyncio"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pamqp = ">=2.2.0,<3"
+
+[[package]]
+name = "pamqp"
+version = "2.3.0"
+description = "RabbitMQ Focused AMQP low-level library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+codegen = ["lxml"]
+
+[[package]]
 name = "pika"
 version = "1.2.0"
 description = "Pika Python AMQP Client Library"
@@ -14,9 +36,17 @@ twisted = ["twisted"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "50340f3cf8cd39485b676603f5d2cee32749dfce128df5618d972b07665bb4d4"
+content-hash = "321e1446f8564269a7707b3de629b620fa89c7928213a212ae83af131388ddd9"
 
 [metadata.files]
+aioamqp = [
+    {file = "aioamqp-0.14.0-py35.py36.py37.py38-none-any.whl", hash = "sha256:55fa703a70e71bc958ad546b9ee0c68387cab366c82fc44c0742d6ad0303745a"},
+    {file = "aioamqp-0.14.0.tar.gz", hash = "sha256:eef5c23a7fedee079d8326406f5c7a5725dfe36c359373da3499fffa16f79915"},
+]
+pamqp = [
+    {file = "pamqp-2.3.0-py2.py3-none-any.whl", hash = "sha256:2f81b5c186f668a67f165193925b6bfd83db4363a6222f599517f29ecee60b02"},
+    {file = "pamqp-2.3.0.tar.gz", hash = "sha256:5cd0f5a85e89f20d5f8e19285a1507788031cfca4a9ea6f067e3cf18f5e294e8"},
+]
 pika = [
     {file = "pika-1.2.0-py2.py3-none-any.whl", hash = "sha256:59da6701da1aeaf7e5e93bb521cc03129867f6e54b7dd352c4b3ecb2bd7ec624"},
     {file = "pika-1.2.0.tar.gz", hash = "sha256:f023d6ac581086b124190cb3dc81dd581a149d216fa4540ac34f9be1e3970b89"},
