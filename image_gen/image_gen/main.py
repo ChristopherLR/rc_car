@@ -4,25 +4,20 @@ import asyncio
 from threading import Thread, Lock
 import aioredis
 import async_timeout
-
+import aioamqp
 
 vs = VideoStream(src=0).start()
 redis = aioredis.from_url("redis://localhost")
 pubsub = redis.pubsub()
 
+async def callback(ch, body, envelope, properties):
+    print(f"recv: {body}")
+    await redis.publish('channel:1', body)
+
 async def event_stream():
-    print("Running Event Stream")
-    count = 0
-    while True:
-        count += 1
-        await asyncio.sleep(0.05)
-        try:
-            async with async_timeout.timeout(0.1):
-                print(f'pub: {count}')
-                await redis.publish('channel:1', count)
-        except asyncio.TimeoutError:
-            print('TIMEOUT on publish event')
-            pass 
+    transport, protocol = await aioamqp.connect()
+    channel = await protocol.channel()
+    await channel.basic_consume(callback, queue_name="state")
 
 async def video_stream():
     while True:

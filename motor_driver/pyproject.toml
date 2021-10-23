@@ -1,15 +1,11 @@
 [tool.poetry]
-name = "state_machine"
+name = "motor_driver"
 version = "0.1.0"
 description = ""
 authors = ["chris <christopher.sutton12@gmail.com>"]
 
-[tool.poetry.scripts]
-start = "state_machine.main:start"
-
 [tool.poetry.dependencies]
-python = "^3.7"
-pika = "^1.2.0"
+python = "3.7.3"
 
 [tool.poetry.dev-dependencies]
 
