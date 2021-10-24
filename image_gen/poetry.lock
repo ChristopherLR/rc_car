@@ -15,6 +15,39 @@ url = "https://www.piwheels.org/simple"
 reference = "piwheels"
 
 [[package]]
+name = "aioredis"
+version = "2.0.0"
+description = "asyncio (PEP 3156) Redis support"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+async-timeout = "*"
+typing-extensions = "*"
+
+[package.extras]
+hiredis = ["hiredis (>=1.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
+name = "async-timeout"
+version = "3.0.1"
+description = "Timeout context manager for asyncio programs"
+category = "main"
+optional = false
+python-versions = ">=3.5.3"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
 name = "imutils"
 version = "0.5.4"
 description = "A series of convenience functions to make basic image processing functions such as translation, rotation, resizing, skeletonization, displaying Matplotlib images, sorting contours, detecting edges, and much more easier with OpenCV and both Python 2.7 and Python 3."
@@ -41,6 +74,22 @@ url = "https://www.piwheels.org/simple"
 reference = "piwheels"
 
 [[package]]
+name = "opencv-python"
+version = "4.5.3.56"
+description = "Wrapper package for OpenCV python bindings."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+numpy = ">=1.14.5"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
+[[package]]
 name = "pamqp"
 version = "2.3.0"
 description = "RabbitMQ Focused AMQP low-level library"
@@ -56,14 +105,33 @@ type = "legacy"
 url = "https://www.piwheels.org/simple"
 reference = "piwheels"
 
+[[package]]
+name = "typing-extensions"
+version = "3.10.0.2"
+description = "Backported and Experimental Type Hints for Python 3.5+"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.source]
+type = "legacy"
+url = "https://www.piwheels.org/simple"
+reference = "piwheels"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7,<3.10"
-content-hash = "c52a75d526e84d9d9acfabdd40720064d8e47780bcd10d9021459cc29c190b8d"
+content-hash = "ba29f0a59a2e150004f1928f633339c92e875b102eecf24e6090a2139a2f03b5"
 
 [metadata.files]
 aioamqp = [
     {file = "aioamqp-0.14.0-py35.py36.py37.py38-none-any.whl", hash = "sha256:55fa703a70e71bc958ad546b9ee0c68387cab366c82fc44c0742d6ad0303745a"},
+]
+aioredis = [
+    {file = "aioredis-2.0.0-py3-none-any.whl", hash = "sha256:cea82a402062aa80a2b8e1439053071ff0c3b001cbf8572afa3f10f71028ac0e"},
+]
+async-timeout = [
+    {file = "async_timeout-3.0.1-py3-none-any.whl", hash = "sha256:4291ca197d287d274d0b6cb5d6f8f8f82d434ed288f962539ff18cc9012f9ea3"},
 ]
 imutils = [
     {file = "imutils-0.5.4-py3-none-any.whl", hash = "sha256:f233020af4b67d42caea543b8a8c9aebbb7f5159d7ef6d7dc8980282a20ade88"},
@@ -74,6 +142,15 @@ numpy = [
     {file = "numpy-1.21.3-cp39-cp39-linux_armv6l.whl", hash = "sha256:342eda8d044c0227d09e33b4cc13d3d68763dff2605117dbce7ef15770f1cb56"},
     {file = "numpy-1.21.3-cp39-cp39-linux_armv7l.whl", hash = "sha256:342eda8d044c0227d09e33b4cc13d3d68763dff2605117dbce7ef15770f1cb56"},
 ]
+opencv-python = [
+    {file = "opencv_python-4.5.3.56-cp37-cp37m-linux_armv6l.whl", hash = "sha256:b81fe5f22e3c3adee43605509710ae7966263f5a7519e8342ee9e11cc5bb4a07"},
+    {file = "opencv_python-4.5.3.56-cp37-cp37m-linux_armv7l.whl", hash = "sha256:b81fe5f22e3c3adee43605509710ae7966263f5a7519e8342ee9e11cc5bb4a07"},
+    {file = "opencv_python-4.5.3.56-cp39-cp39-linux_armv6l.whl", hash = "sha256:2ffa8eec4f8553fd581193672636f6461f99f14716a116219f7acfc18b3066ff"},
+    {file = "opencv_python-4.5.3.56-cp39-cp39-linux_armv7l.whl", hash = "sha256:2ffa8eec4f8553fd581193672636f6461f99f14716a116219f7acfc18b3066ff"},
+]
 pamqp = [
     {file = "pamqp-2.3.0-py2.py3-none-any.whl", hash = "sha256:2f81b5c186f668a67f165193925b6bfd83db4363a6222f599517f29ecee60b02"},
+]
+typing-extensions = [
+    {file = "typing_extensions-3.10.0.2-py3-none-any.whl", hash = "sha256:3811edf930e06572a0dc7b743c8145f73838759b51dfc606c655a9cfae3a0ceb"},
 ]

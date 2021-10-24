@@ -16,6 +16,8 @@ python = "^3.7,<3.10"
 imutils = "^0.5.4"
 numpy = "^1.21.2"
 aioamqp = "^0.14.0"
+opencv-python = "4.5.3.56"
+aioredis = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 

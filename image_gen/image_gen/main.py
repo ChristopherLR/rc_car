@@ -17,11 +17,13 @@ async def callback(ch, body, envelope, properties):
     await redis.publish('channel:1', body)
 
 async def event_stream():
+    print('starting event stream')
     transport, protocol = await aioamqp.connect()
     channel = await protocol.channel()
     await channel.basic_consume(callback, queue_name="state", no_ack=True)
 
 async def video_stream():
+    print('starting video stream')
     while True:
         frame = vs.read()
         r, jpg = cv2.imencode('.jpg', frame)
