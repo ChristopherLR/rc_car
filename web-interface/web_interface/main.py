@@ -6,6 +6,9 @@ from fastapi.templating import Jinja2Templates
 import aioredis
 import asyncio
 import async_timeout
+import aioamqp
+import time
+import json
 
 
 app = FastAPI()
@@ -15,7 +18,11 @@ pubsub = redis.pubsub()
 
 @app.get('/')
 async def root(request: Request):
-    return templates.TemplateResponse("index.html", context={"request": request, "feed": f'video' })
+    return templates.TemplateResponse("index.html", context={
+        "request": request,
+        "feed": f'video',
+        "server_url": "192.168.1.138:8080"
+    })
 
 async def gen():
     while True:
@@ -29,8 +36,13 @@ def video_feed():
 @app.websocket("/buttons")
 async def button_endpoint(websocket: WebSocket):
     await websocket.accept()
+    transport, protocol = await aioamqp.connect()
+    channel = await protocol.channel()
     while True:
         data = await websocket.receive_text()
+        data = json.loads(data)
+        data['ts'] = int(time.time())
+        await channel.basic_publish(exchange_name='', routing_key='ui_commands', payload=json.dumps(data))
         print(data)
 
 @app.websocket("/ws")
@@ -44,7 +56,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 message = await pubsub.get_message(ignore_subscribe_messages=True)
                 if message is not None:
                     data = message['data'].decode('UTF-8')
-                    await websocket.send_text(f'count is: {data}')
+                    await websocket.send_text(f'{data}')
                 await asyncio.sleep(0.001)
         except asyncio.TimeoutError:
             continue

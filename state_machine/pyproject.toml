@@ -1,20 +1,15 @@
 [tool.poetry]
-name = "image_gen"
+name = "state_machine"
 version = "0.1.0"
 description = ""
-authors = ["Christopher Sutton"]
-
-[[tool.poetry.source]]
-name = "piwheels"
-url = "https://www.piwheels.org/simple/"
+authors = ["chris <christopher.sutton12@gmail.com>"]
 
 [tool.poetry.scripts]
-start = "image_gen.main:start"
+start = "state_machine.main:start"
 
 [tool.poetry.dependencies]
-python = "^3.7,<3.10"
-imutils = "^0.5.4"
-numpy = "^1.21.2"
+python = "^3.7"
+pika = "^1.2.0"
 aioamqp = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
