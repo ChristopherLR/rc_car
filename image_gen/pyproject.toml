@@ -12,7 +12,7 @@ url = "https://www.piwheels.org/simple/"
 start = "image_gen.main:start"
 
 [tool.poetry.dependencies]
-python = "^3.7,<3.10"
+python = "3.7.3"
 imutils = "^0.5.4"
 numpy = "^1.21.2"
 aioamqp = "^0.14.0"

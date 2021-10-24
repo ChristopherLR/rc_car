@@ -8,8 +8,7 @@ authors = ["chris <christopher.sutton12@gmail.com>"]
 start = "state_machine.main:start"
 
 [tool.poetry.dependencies]
-python = "^3.7"
-pika = "^1.2.0"
+python = "3.7.3"
 aioamqp = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
