@@ -14,6 +14,7 @@ uvicorn = "^0.15.0"
 Jinja2 = "^3.0.1"
 aioredis = "^2.0.0"
 aioamqp = "^0.14.0"
+websockets = "^10.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

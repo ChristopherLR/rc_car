@@ -4,8 +4,13 @@ version = "0.1.0"
 description = ""
 authors = ["chris <christopher.sutton12@gmail.com>"]
 
+[tool.poetry.scripts]
+start = "motor_driver.main:start"
+
 [tool.poetry.dependencies]
 python = "3.7.3"
+"RPi.GPIO" = "^0.7.0"
+aioamqp = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 

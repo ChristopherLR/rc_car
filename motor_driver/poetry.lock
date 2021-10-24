@@ -1,0 +1,47 @@
+[[package]]
+name = "aioamqp"
+version = "0.14.0"
+description = "AMQP implementation using asyncio"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pamqp = ">=2.2.0,<3"
+
+[[package]]
+name = "pamqp"
+version = "2.3.0"
+description = "RabbitMQ Focused AMQP low-level library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+codegen = ["lxml"]
+
+[[package]]
+name = "rpi.gpio"
+version = "0.7.0"
+description = "A module to control Raspberry Pi GPIO channels"
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "3.7.3"
+content-hash = "4ffa5854cbbb0c8bdc75c8a5c8f397f3360d290d01f08861a34f312abd8caa18"
+
+[metadata.files]
+aioamqp = [
+    {file = "aioamqp-0.14.0-py35.py36.py37.py38-none-any.whl", hash = "sha256:55fa703a70e71bc958ad546b9ee0c68387cab366c82fc44c0742d6ad0303745a"},
+    {file = "aioamqp-0.14.0.tar.gz", hash = "sha256:eef5c23a7fedee079d8326406f5c7a5725dfe36c359373da3499fffa16f79915"},
+]
+pamqp = [
+    {file = "pamqp-2.3.0-py2.py3-none-any.whl", hash = "sha256:2f81b5c186f668a67f165193925b6bfd83db4363a6222f599517f29ecee60b02"},
+    {file = "pamqp-2.3.0.tar.gz", hash = "sha256:5cd0f5a85e89f20d5f8e19285a1507788031cfca4a9ea6f067e3cf18f5e294e8"},
+]
+"rpi.gpio" = [
+    {file = "RPi.GPIO-0.7.0.tar.gz", hash = "sha256:7424bc6c205466764f30f666c18187a0824077daf20b295c42f08aea2cb87d3f"},
+]
