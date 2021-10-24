@@ -9,8 +9,9 @@ import async_timeout
 import aioamqp
 import time
 import json
+from dotenv import dotenv_values
 
-
+config = dotenv_values(".env")
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 redis = aioredis.from_url("redis://localhost")
@@ -21,7 +22,7 @@ async def root(request: Request):
     return templates.TemplateResponse("index.html", context={
         "request": request,
         "feed": f'video',
-        "server_url": "192.168.1.138:8080"
+        "server_url": f"{config['IPADDRESS']}:{config['PORT']}"
     })
 
 async def gen():
@@ -62,7 +63,7 @@ async def websocket_endpoint(websocket: WebSocket):
             continue
 
 def start():
-    uvicorn.run("web_interface.main:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run("web_interface.main:app", host="0.0.0.0", port=int(config['PORT']), reload=True)
 
 
 if __name__ == '__main__':
