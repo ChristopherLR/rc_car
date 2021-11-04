@@ -15,8 +15,6 @@ motor_b_2 = 6
 motor_b_pwm = 13
 
 def setup():
-    global pwm_a
-    global pwm_b
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(motor_a_pwm, GPIO.OUT)
     GPIO.setup(motor_a_1, GPIO.OUT)
@@ -30,13 +28,13 @@ def setup():
     GPIO.output(motor_b_1, GPIO.LOW)
     GPIO.output(motor_b_2, GPIO.LOW)
 
+    global pwm_a
     pwm_a = GPIO.PWM(motor_a_pwm, 1000)
     pwm_a.start(0)
-    pwm_a.ChangeDutyCycle(20.0)
 
+    global pwm_b
     pwm_b = GPIO.PWM(motor_b_pwm, 1000)
     pwm_b.start(0)
-    pwm_b.ChangeDutyCycle(20.0)
 
 def straight(power):
     print("straight: ", power)
@@ -44,8 +42,8 @@ def straight(power):
     GPIO.output(motor_a_2, GPIO.HIGH)
     pwm_a.ChangeDutyCycle(power)
 
-    GPIO.output(motor_b_1, GPIO.HIGH)
-    GPIO.output(motor_b_2, GPIO.LOW)
+    GPIO.output(motor_b_1, GPIO.LOW)
+    GPIO.output(motor_b_2, GPIO.HIGH)
     pwm_b.ChangeDutyCycle(power)
 
 def reverse(power):
@@ -54,27 +52,22 @@ def reverse(power):
     GPIO.output(motor_a_2, GPIO.LOW)
     pwm_a.ChangeDutyCycle(power)
 
-    GPIO.output(motor_b_1, GPIO.LOW)
-    GPIO.output(motor_b_2, GPIO.HIGH)
+    GPIO.output(motor_b_1, GPIO.HIGH)
+    GPIO.output(motor_b_2, GPIO.LOW)
     pwm_b.ChangeDutyCycle(power)
 
-def right(power):
-    print("right: ", power)
+def left(power):
+    print("left: ", power)
     GPIO.output(motor_a_1, GPIO.LOW)
     GPIO.output(motor_a_2, GPIO.HIGH)
     pwm_a.ChangeDutyCycle(power)
 
-    GPIO.output(motor_b_1, GPIO.LOW)
-    GPIO.output(motor_b_2, GPIO.HIGH)
+    GPIO.output(motor_b_1, GPIO.HIGH)
+    GPIO.output(motor_b_2, GPIO.LOW)
     pwm_b.ChangeDutyCycle(power)
 
-def stop():
-    pwm_a.ChangeDutyCycle(0)
-    pwm_b.ChangeDutyCycle(0)
-
-
-def left(power):
-    print("left: ", power)
+def right(power):
+    print("right: ", power)
     GPIO.output(motor_a_1, GPIO.HIGH)
     GPIO.output(motor_a_2, GPIO.LOW)
     pwm_a.ChangeDutyCycle(power)
@@ -82,6 +75,16 @@ def left(power):
     GPIO.output(motor_b_1, GPIO.LOW)
     GPIO.output(motor_b_2, GPIO.HIGH)
     pwm_b.ChangeDutyCycle(power)
+
+def stop():
+    GPIO.output(motor_a_1, GPIO.LOW)
+    GPIO.output(motor_a_2, GPIO.LOW)
+    GPIO.output(motor_b_1, GPIO.LOW)
+    GPIO.output(motor_b_2, GPIO.LOW)
+    pwm_a.ChangeDutyCycle(0)
+    pwm_b.ChangeDutyCycle(0)
+
+
 
 async def motor_state_cb(ch, body, envelope, properties):
     data = json.loads(body)
