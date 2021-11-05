@@ -13,7 +13,10 @@
         flex-direction: row;
       }
       #video-container {
-        flex: 1;
+	width: 550px;
+      }
+      #video {
+      	width: 100%;
       }
       #feed-container {
         flex: 1;
@@ -55,6 +58,10 @@
 	<input type="number" id="throttle" name="throttle" min="0" max="100"
 		class="px-2 py-1 placeholder-gray-400 text-gray-600 relative bg-white bg-white rounded text-sm border border-gray-400 outline-none focus:outline-none focus:ring w-full"
 	/>
+      </div>
+      <div id="controller" class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <button onClick="press_button('auto_on')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="forward">Auto On</button>
+        <button onClick="press_button('auto_off')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="forward">Auto Off</button>
       </div>
     </div>
 
